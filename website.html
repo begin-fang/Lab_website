@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Space Autonomous Manipulation and Exploration Robotics Lab</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .member-card:hover .member-img {
+            transform: scale(1.05);
+        }
+        
+        .research-card {
+            transition: all 0.3s ease;
+        }
+        
+        .research-card:hover {
+            background-color: rgba(30, 41, 59, 0.9);
+        }
+
+        .focus-card {
+            transition: all 0.3s ease;
+            border-bottom: 4px solid transparent;
+        }
+
+        .focus-card:hover {
+            transform: translateY(-5px);
+            border-bottom-color: #06b6d4;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-gray-100 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-slate-800/90 backdrop-blur-md fixed w-full z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <span class="text-2xl font-bold text-cyan-400 flex items-center">
+                             <img src="lab_logo.png" alt="SAMER Lab Logo" class="h-12 w-auto mr-3 object-contain">
+                        </span>
+                    </div>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#home" class="px-3 py-2 rounded-md text-sm font-medium text-cyan-400 hover:bg-slate-700 transition">Home</a>
+                        <a href="#about" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-400 hover:bg-slate-700 transition">About</a>
+                        <a href="#team" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-400 hover:bg-slate-700 transition">Team</a>
+                        <a href="#research" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-400 hover:bg-slate-700 transition">Research</a>
+                        <a href="#publications" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-400 hover:bg-slate-700 transition">Publications</a>
+                        <a href="#contact" class="px-3 py-2 rounded-md text-sm font-medium text-gray-300 hover:text-cyan-400 hover:bg-slate-700 transition">Contact</a>
+                    </div>
+                </div>
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="text-gray-300 hover:text-white focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-slate-800/95 backdrop-blur-md">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-cyan-400 hover:bg-slate-700 transition">Home</a>
+                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-slate-700 transition">About</a>
+                <a href="#team" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-slate-700 transition">Team</a>
+                <a href="#research" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-slate-700 transition">Research</a>
+                <a href="#publications" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-slate-700 transition">Publications</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-cyan-400 hover:bg-slate-700 transition">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-24 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-2 text-white leading-relaxed md:leading-relaxed">
+                <span class="text-cyan-400">Space Autonomous Manipulation and Exploration</span> <br> Robotics Lab (SAMER Lab)
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-20">
+                Pioneering the future of autonomous space robotics for planetary exploration and orbital operations
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#research" class="px-8 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-medium rounded-lg transition duration-300 transform hover:scale-105">
+                    Explore Our Research
+                </a>
+                <a href="#contact" class="px-8 py-3 border border-cyan-400 text-cyan-400 hover:bg-cyan-400/10 font-medium rounded-lg transition duration-300 transform hover:scale-105">
+                    Contact Us
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-4">About SAMER Lab</h2>
+                <div class="w-20 h-1 bg-cyan-500 mx-auto"></div>
+            </div>
+            <!-- Research Focus Areas -->
+            <div class="text-center mb-12">
+                <p class="text-gray-400 max-w-8xl mx-auto text-justify">The Space Autonomous Manipulation and Exploration Robotics (SAMER) Lab is dedicated to developing cutting-edge robotic systems for space applications. 
+                    Our research focuses on autonomous manipulation, mobility, and exploration technologies that enable robots to operate effectively in the challenging environments of space.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Space Servicing -->
+                <div class="bg-slate-900/80 p-6 rounded-xl focus-card border border-slate-700">
+                    <div class="overflow-hidden rounded-lg mb-6">
+                        <img src="space_manipulation.jpg" 
+                        alt="Space Manipulation Robotics" class="rounded-xl shadow-2xl w-full h-auto object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3 flex items-center">
+                        <i class="fas fa-satellite text-cyan-400 mr-3"></i> Space Servicing & Manipulation
+                    </h3>
+                    <p class="text-gray-400 mb-4 text-justify">
+                        Developing robotic systems for in-orbit satellite servicing, assembly, and maintenance. Our technologies enable autonomous refueling, repair, and debris removal operations that extend mission lifetimes and improve space sustainability.
+                    </p>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-2 text-xs"></i>
+                            <span>Autonomous satellite servicing</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-2 text-xs"></i>
+                            <span>On-orbit assembly of large structures</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-2 text-xs"></i>
+                            <span>Space debris mitigation</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Planetary Exploration -->
+                <div class="bg-slate-900/80 p-6 rounded-xl focus-card border border-slate-700">
+                    <div class="overflow-hidden rounded-lg mb-6">
+                        <img src="planetary_detection.jpg" 
+                        alt="Planetary Exploration Robotics" class="rounded-xl shadow-2xl w-full h-auto object-cover">
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3 flex items-center">
+                        <i class="fas fa-globe-americas text-cyan-400 mr-3"></i> Planetary Exploration & Detection
+                    </h3>
+                    <p class="text-gray-400 mb-4 text-justify">
+                        Creating autonomous robotic systems for planetary surface exploration, capable of operating in extreme environments from the Moon to Mars and beyond. Our rovers and landers incorporate advanced autonomy for scientific discovery.
+                    </p>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-2 text-xs"></i>
+                            <span>Autonomous navigation in unknown terrain</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-2 text-xs"></i>
+                            <span>Sample collection and analysis</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-cyan-400 mt-1 mr-2 text-xs"></i>
+                            <span>Multi-robot coordination for exploration</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-4">Our Team</h2>
+                <div class="w-20 h-1 bg-cyan-500 mx-auto mt-4"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">Meet the brilliant minds behind our innovative research in space robotics</p>
+            </div> -->
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-4">Our Team</h2>
+                <div class="w-20 h-1 bg-cyan-500 mx-auto"></div>
+            </div>
+            <!-- Research Focus Areas -->
+            <div class="text-center mb-12">
+                <p class="text-gray-400 max-w-8xl mx-auto">Meet the brilliant minds behind our innovative research in space robotics.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+                <!-- Faculty -->
+                <div class="bg-slate-800 rounded-xl overflow-hidden shadow-lg transition-all duration-300 member-card">
+                    <div class="overflow-hidden h-56">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=688&q=80" 
+                             alt="Dr. Elena Rodriguez" class="w-full h-full object-cover transition duration-500 member-img">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-white mb-1">Prof. WeiJia Zhou</h3>
+                        <p class="text-cyan-400 text-sm mb-2">Director & Principal Investigator</p>
+                        <p class="text-gray-300 text-sm mb-3">
+                            Expert in autonomous space systems with 15+ years of experience in robotic manipulation for orbital operations.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-cyan-400 transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-cyan-400 transition">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-cyan-400 transition">
+                                <i class="fas fa-graduation-cap"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Postdoc -->
+                <div class="bg-slate-800 rounded-xl overflow-hidden shadow-lg transition-all duration-300 member-card">
+                    <div class="overflow-hidden h-56">
+                        <img src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" 
+                             alt="Dr. Marcus Chen" class="w-full h-full object-cover transition duration-500 member-img">
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-lg font-bold text-white mb-1">Prof. Wei Zhang</h3>
+                        <p class="text-cyan-400 text-sm mb-2">Senior Research Scientist</p>
+                        <p class="text-gray-300 text-sm mb-3">
+                            Specializes in machine learning for autonomous decision-making in space robotics systems.
+                        </p>
+                        <div class="flex space-x-3">
+                            <a href="#" class="text-gray-400 hover:text-cyan-400 transition">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-cyan-400 transition">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="#" class="text-gray-400 hover:text-cyan-400 transition">
+                                <i class="fas fa-graduation-cap"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <h3 class="text-xl font-semibold text-white mb-6">Research Assistants</h3>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
+                    <div class="bg-slate-800/50 p-6 rounded-lg">
+                        <div class="w-36 h-36 mx-auto mb-3 rounded-full overflow-hidden">
+                            <img src="zhiyue_fang.jpg" alt="Zhiyue Fang" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-medium text-white">Zhiyue Fang</h4>
+                        <p class="text-xs text-gray-400">PhD Candidate</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-lg">
+                        <div class="w-36 h-36 mx-auto mb-3 rounded-full overflow-hidden">
+                            <img src="yaowei_wang.jpg" alt="Yaowei Wang" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-medium text-white">Yaowei Wang</h4>
+                        <p class="text-xs text-gray-400">PhD Candidate</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-lg">
+                        <div class="w-36 h-36 mx-auto mb-3 rounded-full overflow-hidden">
+                            <img src="yongxu_lu.jpg" alt="Yongxu Lu" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-medium text-white">Yongxu Lu</h4>
+                        <p class="text-xs text-gray-400">Master Student</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-lg">
+                        <div class="w-36 h-36 mx-auto mb-3 rounded-full overflow-hidden">
+                            <img src="shaojie_wang.jpg" alt="Shaojie Wang" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-medium text-white">Shaojie Wang</h4>
+                        <p class="text-xs text-gray-400">Master Student</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-lg">
+                        <div class="w-36 h-36 mx-auto mb-3 rounded-full overflow-hidden">
+                            <img src="ran_liu.jpg" alt="Ran Liu" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-medium text-white">Ran Liu</h4>
+                        <p class="text-xs text-gray-400">PhD Candidate</p>
+                    </div>
+                    <div class="bg-slate-800/50 p-6 rounded-lg">
+                        <div class="w-36 h-36 mx-auto mb-3 rounded-full overflow-hidden">
+                            <img src="fuhao_li.jpg" alt="Fuhao Li" class="w-full h-full object-cover">
+                        </div>
+                        <h4 class="text-sm font-medium text-white">Fuhao Li</h4>
+                        <p class="text-xs text-gray-400">Master Student</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research" class="py-20 bg-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-4">Research Areas</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Exploring the frontiers of autonomous space robotics</p>
+                <div class="w-20 h-1 bg-cyan-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-slate-900/80 p-8 rounded-xl research-card border border-slate-700 hover:border-cyan-500/30">
+                    <div class="w-14 h-14 bg-cyan-500/10 rounded-lg flex items-center justify-center text-cyan-400 mb-6">
+                        <i class="fas fa-hand-paper text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Autonomous Manipulation</h3>
+                    <p class="text-gray-400">
+                        Developing advanced algorithms for robotic arms to perform complex tasks in space without human intervention, including assembly, maintenance, and sample collection.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900/80 p-8 rounded-xl research-card border border-slate-700 hover:border-cyan-500/30">
+                    <div class="w-14 h-14 bg-cyan-500/10 rounded-lg flex items-center justify-center text-cyan-400 mb-6">
+                        <i class="fas fa-robot text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Planetary Exploration</h3>
+                    <p class="text-gray-400">
+                        Creating robust robotic systems capable of autonomous navigation and scientific investigation on planetary surfaces, from Mars to icy moons.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900/80 p-8 rounded-xl research-card border border-slate-700 hover:border-cyan-500/30">
+                    <div class="w-14 h-14 bg-cyan-500/10 rounded-lg flex items-center justify-center text-cyan-400 mb-6">
+                        <i class="fas fa-brain text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">AI for Space Robotics</h3>
+                    <p class="text-gray-400">
+                        Implementing machine learning and computer vision techniques to enable robots to make intelligent decisions in unpredictable space environments.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900/80 p-8 rounded-xl research-card border border-slate-700 hover:border-cyan-500/30">
+                    <div class="w-14 h-14 bg-cyan-500/10 rounded-lg flex items-center justify-center text-cyan-400 mb-6">
+                        <i class="fas fa-satellite text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Orbital Servicing</h3>
+                    <p class="text-gray-400">
+                        Designing robotic systems for in-orbit satellite servicing, including refueling, repair, and debris removal operations.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900/80 p-8 rounded-xl research-card border border-slate-700 hover:border-cyan-500/30">
+                    <div class="w-14 h-14 bg-cyan-500/10 rounded-lg flex items-center justify-center text-cyan-400 mb-6">
+                        <i class="fas fa-microscope text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Extreme Environment Robotics</h3>
+                    <p class="text-gray-400">
+                        Developing robots that can withstand and operate in the extreme temperatures, radiation, and vacuum conditions of space.
+                    </p>
+                </div>
+                
+                <div class="bg-slate-900/80 p-8 rounded-xl research-card border border-slate-700 hover:border-cyan-500/30">
+                    <div class="w-14 h-14 bg-cyan-500/10 rounded-lg flex items-center justify-center text-cyan-400 mb-6">
+                        <i class="fas fa-network-wired text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-white mb-3">Multi-Robot Systems</h3>
+                    <p class="text-gray-400">
+                        Investigating coordination strategies for teams of robots working together to accomplish complex space missions more efficiently.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section id="publications" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-4">Recent Publications</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Our contributions to the field of space robotics</p>
+                <div class="w-20 h-1 bg-cyan-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700/50 transition border-l-4 border-cyan-500">
+                    <h3 class="text-xl font-semibold text-white mb-2">"Adaptive Grasping for Irregular Objects in Microgravity"</h3>
+                    <p class="text-cyan-400 text-sm mb-3">Journal of Space Robotics, 2023</p>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Presented a novel grasping algorithm that enables robotic arms to securely manipulate irregularly shaped objects in microgravity conditions with 98% success rate.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Authors: Johnson, S., Rodriguez, E., Chen, M.</span>
+                        <a href="#" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium flex items-center">
+                            Read Paper <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700/50 transition border-l-4 border-cyan-500">
+                    <h3 class="text-xl font-semibold text-white mb-2">"Autonomous Navigation for Planetary Rovers Using Deep Reinforcement Learning"</h3>
+                    <p class="text-cyan-400 text-sm mb-3">IEEE Transactions on Aerospace and Electronic Systems, 2023</p>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Developed a DRL-based navigation system that reduces energy consumption by 40% while maintaining high path-finding accuracy in unknown Martian terrain.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Authors: Chen, M., Patel, P., Rodriguez, E.</span>
+                        <a href="#" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium flex items-center">
+                            Read Paper <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700/50 transition border-l-4 border-cyan-500">
+                    <h3 class="text-xl font-semibold text-white mb-2">"Multi-Agent Coordination for In-Space Assembly of Large Structures"</h3>
+                    <p class="text-cyan-400 text-sm mb-3">Acta Astronautica, 2022</p>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Proposed a decentralized control framework for teams of robots to collaboratively assemble large space structures with minimal communication overhead.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Authors: Wong, A., Garcia, M., Rodriguez, E.</span>
+                        <a href="#" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium flex items-center">
+                            Read Paper <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-slate-800 p-6 rounded-lg hover:bg-slate-700/50 transition border-l-4 border-cyan-500">
+                    <h3 class="text-xl font-semibold text-white mb-2">"Resilient Control Systems for Space Robotics Under Communication Delay"</h3>
+                    <p class="text-cyan-400 text-sm mb-3">AIAA Journal of Guidance, Control, and Dynamics, 2022</p>
+                    <p class="text-gray-400 text-sm mb-4">
+                        Introduced a novel control architecture that maintains operational capability even with significant Earth-to-space communication delays.
+                    </p>
+                    <div class="flex justify-between items-center">
+                        <span class="text-xs text-gray-500">Authors: Rodriguez, E., Kim, D., Wilson, J.</span>
+                        <a href="#" class="text-cyan-400 hover:text-cyan-300 text-sm font-medium flex items-center">
+                            Read Paper <i class="fas fa-arrow-right ml-1 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <a href="#" class="inline-flex items-center px-6 py-3 border border-cyan-400 text-cyan-400 font-medium rounded-lg hover:bg-cyan-400/10 transition">
+                    View All Publications
+                    <i class="fas fa-arrow-right ml-2"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="py-16 bg-slate-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-cyan-400 mb-2">15+</div>
+                    <div class="text-gray-400">Research Projects</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-cyan-400 mb-2">50+</div>
+                    <div class="text-gray-400">Peer-Reviewed Papers</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-cyan-400 mb-2">8</div>
+                    <div class="text-gray-400">Patents Filed</div>
+                </div>
+                <div class="p-6">
+                    <div class="text-4xl font-bold text-cyan-400 mb-2">$5M+</div>
+                    <div class="text-gray-400">Research Funding</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-slate-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-4">Contact Us</h2>
+                <p class="text-gray-400 max-w-2xl mx-auto">Get in touch with the SAMER Lab team</p>
+                <div class="w-20 h-1 bg-cyan-500 mx-auto mt-4"></div>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <form class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-gray-300 mb-1">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-gray-300 mb-1">Subject</label>
+                            <input type="text" id="subject" name="subject" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-gray-300 mb-1">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500 text-white"></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="w-full px-6 py-3 bg-cyan-600 hover:bg-cyan-700 text-white font-medium rounded-lg transition">
+                                Send Message
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <div class="bg-slate-800 p-8 rounded-xl h-full">
+                        <h3 class="text-xl font-semibold text-white mb-6">SAMER Lab Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-map-marker-alt text-cyan-400 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-sm font-medium text-white mb-1">Location</h4>
+                                    <p class="text-gray-400">
+                                        Department of Aerospace Engineering<br>
+                                        University of Space Technology<br>
+                                        Building 42, Room 315<br>
+                                        123 Cosmos Avenue, Space City, SC 90210
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-envelope text-cyan-400 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-sm font-medium text-white mb-1">Email</h4>
+                                    <p class="text-gray-400">
+                                        <a href="mailto:contact@samerlab.space" class="hover:text-cyan-400 transition">contact@samerlab.space</a>
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-phone-alt text-cyan-400 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-sm font-medium text-white mb-1">Phone</h4>
+                                    <p class="text-gray-400">
+                                        +1 (555) 123-4567
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="flex-shrink-0 mt-1">
+                                    <i class="fas fa-clock text-cyan-400 text-xl"></i>
+                                </div>
+                                <div class="ml-4">
+                                    <h4 class="text-sm font-medium text-white mb-1">Lab Hours</h4>
+                                    <p class="text-gray-400">
+                                        Monday - Friday: 8:00 AM - 6:00 PM<br>
+                                        Weekends: By appointment only
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-8">
+                            <h4 class="text-sm font-medium text-white mb-4">Follow Us</h4>
+                            <div class="flex space-x-4">
+                                <a href="#" class="w-10 h-10 bg-slate-700 rounded-full flex items-center justify-center text-gray-300 hover:bg-cyan-600 hover:text-white transition">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 bg
+</html>
